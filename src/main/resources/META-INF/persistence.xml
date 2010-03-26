@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	version="1.0">
+
+	<persistence-unit name="ScalaSpringIntegration" transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<properties>
+			<property name="hibernate.archive.autodetection" value="hbm" /> 
+            <property name="hibernate.ejb.interceptor" value="org.jsi.domain.hibernate.DependencyInjectionInterceptor" /> 
+		</properties>
+	</persistence-unit>
+
+
+</persistence>
+

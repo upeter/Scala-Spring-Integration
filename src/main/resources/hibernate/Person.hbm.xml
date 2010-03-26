@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping default-access="field">
+  
+   <class name="org.jsi.domain.Person" table="PERSON">
+        <id column="ID" name="id" type="long" length="10">
+            <generator class="native"/>
+        </id>
+
+	<set name="relations" table="RELATIONS" cascade="all" lazy="true">
+		<key column="RELATION_ID"/>
+		<many-to-many class="org.jsi.domain.Person"/>
+	</set>
+	<property column="NAME" name="name" />
+    </class>
+    
+</hibernate-mapping>

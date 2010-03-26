@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd"
+  default-autowire="byName">
+
+	<!-- ================================================================== -->
+	<!-- Hibernate JPA Entity Manager -->
+	<!-- ================================================================== -->
+
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="jpaVendorAdapter">
+			<bean
+				class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+				<property name="showSql" value="true" />
+				<property name="generateDdl" value="true" />
+            </bean>
+		</property>
+	     <property name="persistenceProvider">  
+	         <bean class="org.hibernate.ejb.HibernatePersistence"/>  
+	     </property>
+        <property name="persistenceUnitName" value="ScalaSpringIntegration" />
+		
+		 <property name="jpaDialect" ref="jpaDialect" />
+	</bean>
+
+    <bean name="jpaDialect" class="org.springframework.orm.jpa.vendor.HibernateJpaDialect"/>
+
+    <!-- ================================================================== -->
+    <!-- DAO-->
+    <!-- ================================================================== -->
+    <bean id="personDao" class="org.jsi.domain.jpa.JpaPersonDao"/>
+
+    <!-- ================================================================== -->
+    <!-- Service-->
+    <!-- ================================================================== -->
+    <bean id="notificationService" class="org.jsi.domain.NotificationServiceImpl"/>
+
+
+	<!-- ================================================================== -->
+	<!-- Transaction Manager-->
+	<!-- ================================================================== -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+		<property name="dataSource" ref="dataSource" />
+		<property name="jpaDialect" ref="jpaDialect" />
+	</bean>
+
+	<bean id="richDomainFactory" class="org.jsi.di.spring.RichDomainObjectFactory" factory-method="autoWireFactory"/>
+
+</beans>
