@@ -19,6 +19,6 @@ class AbstractDatabaseTestCase extends AbstractTransactionalDataSourceSpringCont
 
   }
 
-  def testDummy(){}
+  def testDummy() {}
 
 }

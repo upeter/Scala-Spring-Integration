@@ -10,25 +10,23 @@ import org.jsi.domain._
 import AbstractScalaJpaDaoSupport._
 
 class JpaPersonDao extends AbstractScalaJpaDaoSupport(classOf[Person]) with PersonDao {
-  
-  
-    
-        def findByName(name:String) = { getJpaTemplate().executeFind( (em:EntityManager) => {
-            val query = em.createQuery("SELECT p FROM Person p WHERE p.name like :name");
-            query.setParameter("name", "%" + name + "%");
-            query.getResultList();
-      }).asInstanceOf[List[Person]].toList
-      }
-                                        
-  
-//      public List<T> findAll() {
-//        return getHibernateTemplate().executeFind(new HibernateCallback() {
-//            public List doInHibernate(Session session) throws HibernateException, SQLException {
-//                Criteria criteria = session.createCriteria(persistentClass);
-//                if (getDefaultOrder() != null) {
-//                    criteria = criteria.addOrder(getDefaultOrder());
-//                }
-//                return criteria.list();
-//            }
-//        });
+  def findByName(name: String) = {
+    getJpaTemplate().executeFind((em: EntityManager) => {
+      val query = em.createQuery("SELECT p FROM Person p WHERE p.name like :name");
+      query.setParameter("name", "%" + name + "%");
+      query.getResultList();
+    }).asInstanceOf[List[Person]].toList
+  }
+
+
+  //      public List<T> findAll() {
+  //        return getHibernateTemplate().executeFind(new HibernateCallback() {
+  //            public List doInHibernate(Session session) throws HibernateException, SQLException {
+  //                Criteria criteria = session.createCriteria(persistentClass);
+  //                if (getDefaultOrder() != null) {
+  //                    criteria = criteria.addOrder(getDefaultOrder());
+  //                }
+  //                return criteria.list();
+  //            }
+  //        });
 }

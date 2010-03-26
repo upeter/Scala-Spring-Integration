@@ -51,7 +51,7 @@ class JpaPersonDaoTest extends AbstractDatabaseTestCase {
     val name2 = "Martin Odersky"
     val p1 = Person(name1).save
     val p2 = Person(name2).save
-                                               
+
     p2.link(p1)
     p1.link(p2)
     p1.save
